@@ -28,6 +28,21 @@ var albumMarconi = {
     ]
 };
 
+var albumChristmas = {
+    title: 'Christmas Songs',
+    artist: 'Santa Claus',
+    label: 'Elf Productions',
+    year: '2016',
+    albumArtUrl: 'https://image.freepik.com/free-vector/merry-christmas-illustration_23-2147527653.jpg',
+    songs: [
+        { title: 'Deck the Halls', duration: '3:25'},
+        { title: 'Jingle Bells', duration: '4:12'},
+        { title: 'Rudolph the Red Nosed Reindeer', duration: '4:04'},
+        { title: 'Silent Night', duration: '5:20'},
+        { title: "I'll Be Home for Christmas", duration: '4:45'}
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template = 
         '<tr class="album-view-song-item">'
@@ -40,13 +55,13 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
-var setCurrentAlbum = function(album) {
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+var setCurrentAlbum = function(album) {
     
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
@@ -62,5 +77,16 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function () {
     setCurrentAlbum(albumPicasso);
+    
+    var i = 0;
+    var albumArray = [albumPicasso, albumMarconi, albumChristmas];
+    
+    albumImage.addEventListener("click", function(event) {
+        setCurrentAlbum(albumArray[i]);
+        i++;
+        if ( i == albumArray.length) {
+            i = 0;
+        }
+    });
 };
                               
